@@ -1,6 +1,86 @@
-<head>
-    <title>Hello, world!</title>
+<!DOCTYPE html>
+<head lang='en'>
+    <style>
+        body {
+            font: 24px Helvetica;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #map-canvas {
+            width: 100%;
+            height: 550px;
+        }
+
+        #map-controls {
+            width: 992px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        #map-controls > * {
+            flex: 1 1 auto;
+        }
+
+        .map-control {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .map-control > div {
+            flex: 1 1 auto;
+            margin-left: 20px
+        }
+    </style>
+    <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css'>
 </head>
 <body>
-    <p>Beep boop</p>
+    <main>
+        <div id='map-canvas'></div>
+        <section id='map-controls'>
+            <div class='map-control'>
+                <p>Start:</p>
+                <div id='slider-start'></div>
+            </div>
+            <div class='map-control'>
+                <p>End:</p>
+                <div id='slider-end'></div>
+            </div>
+        </section>
+    </main>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    <script src='https://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+    <script src='https://maps.googleapis.com/maps/api/js'></script>
+    <script>
+        $(function initialize() {
+            // Create the map
+            var mapOptions = {
+                center: new google.maps.LatLng(-33.903224, 151.149661),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map($('#map-canvas')[0], mapOptions);
+
+            // Initialise the controls
+            $('#slider-start').slider();
+            $('#slider-end').slider();
+
+            // Create the polyline
+            var path = [
+                new google.maps.LatLng(-33.903224, 151.149661),
+                new google.maps.LatLng(-33.903224, 150.149661)
+            ];
+            var polyline = new google.maps.Polyline({
+                path: path,
+                strokeColor: '#ff0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 3
+            });
+
+            // Set the polyline
+            polyline.setMap(map);
+        });
+    </script>
 </body>
