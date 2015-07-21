@@ -13,10 +13,11 @@
         }
 
         #map-controls {
-            width: 992px;
+            max-width: 992px;
             margin: 0 auto;
+            padding: 10px;
             display: flex;
-            flex-direction: column;
+            flex-flow: column nowrap;
         }
         #map-controls > * {
             flex: 1 1 auto;
@@ -24,12 +25,14 @@
 
         .map-control {
             display: flex;
-            flex-direction: row;
+            flex-direction: row nowrap;
             align-items: center;
+        }
+        .map-control > p {
+            flex: 0 0 100px;
         }
         .map-control > div {
             flex: 1 1 auto;
-            margin-left: 20px
         }
     </style>
     <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css'>
