@@ -2,7 +2,6 @@
 <head lang='en'>
     <style>
         body {
-            font: 24px Helvetica;
             margin: 0px;
             padding: 0px;
         }
@@ -16,6 +15,7 @@
             max-width: 992px;
             margin: 0 auto;
             padding: 10px;
+            font: 24px Helvetica;
             display: flex;
             flex-flow: column nowrap;
         }
@@ -29,13 +29,10 @@
             align-items: center;
         }
         .map-control > p {
-            flex: 0 0 100px;
+            flex: 0 0 90px;
         }
         .map-control > div {
             flex: 1 1 auto;
-        }
-
-        .ui-slider-handle {
         }
     </style>
     <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css'>
@@ -54,7 +51,6 @@
             </div>
         </section>
     </main>
-
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
     <script src='https://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
@@ -78,9 +74,9 @@
                     new google.maps.LatLng(-33.903224, START_X),
                     new google.maps.LatLng(-33.903224, END_X)
                 ],
-                strokeColor: '#ff0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 3
+                strokeColor: '#1982C4',
+                strokeOpacity: 0.9,
+                strokeWeight: 5.5
             });
             line.setMap(map);
 
