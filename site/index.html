@@ -36,10 +36,9 @@
         }
 
         .ui-slider-handle {
-            outline: none;
         }
     </style>
-    <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css'>
+    <link rel='stylesheet' href='https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css'>
 </head>
 <body>
     <main>
@@ -62,6 +61,9 @@
     <script src='https://maps.googleapis.com/maps/api/js'></script>
     <script>
         $(function initialize() {
+            var START_X = 151.149661;
+            var END_X = 150.149661;
+
             // Create the map
             var mapOptions = {
                 center: new google.maps.LatLng(-33.903224, 151.149661),
@@ -70,24 +72,39 @@
             }
             var map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
-            // Initialise the controls
-            $('#slider-start').slider();
-            $('#slider-end').slider();
-
             // Create the polyline
-            var path = [
-                new google.maps.LatLng(-33.903224, 151.149661),
-                new google.maps.LatLng(-33.903224, 150.149661)
-            ];
-            var polyline = new google.maps.Polyline({
-                path: path,
+            var line = new google.maps.Polyline({
+                path: [
+                    new google.maps.LatLng(-33.903224, START_X),
+                    new google.maps.LatLng(-33.903224, END_X)
+                ],
                 strokeColor: '#ff0000',
                 strokeOpacity: 1.0,
                 strokeWeight: 3
             });
+            line.setMap(map);
 
-            // Set the polyline
-            polyline.setMap(map);
+            // Initialise the controls
+            $('#slider-start').slider({ 
+                change: function (event, ui) {
+                    var path = line.getPath().getArray();
+                    path[0] = new google.maps.LatLng(
+                        path[0].lat(),
+                        START_X + (1 * ui.value / 100)
+                    );
+                    line.setPath(path);
+                }
+            });
+            $('#slider-end').slider({
+                change: function (event, ui) {
+                    var path = line.getPath().getArray();
+                    path[1] = new google.maps.LatLng(
+                        path[1].lat(),
+                        END_X - (1 * ui.value / 100)
+                    );
+                    line.setPath(path);
+                }
+            });
         });
     </script>
 </body>
