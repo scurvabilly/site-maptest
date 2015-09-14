@@ -1,1 +1,1 @@
-A Docker container running the web server for my static site.
+Playing around with the Google Maps API. Hosted via nginx in a Docker container.
